@@ -19,21 +19,24 @@ services:
         limits:
           memory: 4G # Importante no seu .wslconfig de 8GB
 
-  # Kafka (Modo KRaft - Sem Zookeeper para economizar RAM)
+  # Kafka (Imagem Oficial Apache - Modo KRaft)
   kafka:
-    image: bitnami/kafka:3.6
+    image: apache/kafka:3.7.0
     container_name: edufin-kafka
     ports:
       - '9092:9092'
     environment:
-      - KAFKA_CFG_NODE_ID=0
-      - KAFKA_CFG_PROCESS_ROLES=controller,broker
-      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
-      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
-      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
-      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      # Configuração Padrão Apache (Sem o prefixo _CFG e sem a frescura de tags da Bitnami)
+      - KAFKA_NODE_ID=0
+      - KAFKA_PROCESS_ROLES=controller,broker
+      - KAFKA_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
+      - KAFKA_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      # Atenção: Aqui usamos o nome do container/service 'kafka' para comunicação interna
+      - KAFKA_CONTROLLER_QUORUM_VOTERS=0@edufin-kafka:9093
     volumes:
-      - kafka_data:/bitnami/kafka
+      - kafka_data:/var/lib/kafka/data
 
   # RabbitMQ (Com Plugin de Management)
   rabbitmq:
