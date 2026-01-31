@@ -1,0 +1,22 @@
+{
+  "folders": [
+    {
+      "name": "Backend (Spring Boot)",
+      "path": "backend",
+    },
+    {
+      "name": "Frontend (Angular)",
+      "path": "frontend",
+    },
+  ],
+  "settings": {
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "editor.formatOnSave": true,
+    "files.exclude": {
+      "**/.git": true,
+      "**/.DS_Store": true,
+      "**/node_modules": true, // Esconde node_modules da busca para não travar
+      "**/target": true,
+    },
+  },
+}

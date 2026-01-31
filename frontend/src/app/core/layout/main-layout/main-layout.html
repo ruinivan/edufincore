@@ -1,0 +1,17 @@
+<nav class="flex-1 p-4 space-y-2">
+  <a
+    routerLink="/"
+    class="block px-4 py-3 rounded-lg bg-primary-dark text-white font-medium cursor-pointer"
+  >
+    📊 Dashboard
+  </a>
+  <a
+    routerLink="/tuition"
+    class="block px-4 py-3 rounded-lg hover:bg-primary-light/20 text-gray-300 hover:text-white transition cursor-pointer"
+  >
+    🎓 Mensalidades
+  </a>
+</nav>
+<div class="flex-1 overflow-auto p-8">
+  <router-outlet></router-outlet>
+</div>
