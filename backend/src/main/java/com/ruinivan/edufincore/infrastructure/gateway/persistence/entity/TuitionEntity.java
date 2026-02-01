@@ -8,8 +8,8 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "TB_TUITION", indexes = {
-    @Index(name = "IDX_TUITION_STATUS", columnList = "status"), // Busca rápida por pendentes
-    @Index(name = "IDX_TUITION_DUE_DATE", columnList = "due_date") // Relatórios por data
+        @Index(name = "IDX_TUITION_STATUS", columnList = "status"), // Busca rápida por pendentes
+        @Index(name = "IDX_TUITION_DUE_DATE", columnList = "due_date") // Relatórios por data
 })
 @Getter
 @Setter
@@ -18,8 +18,11 @@ import java.time.LocalDate;
 public class TuitionEntity extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "student_id", nullable = false)
-    private StudentEntity student;
+    @JoinColumn(name = "enrollment_id", nullable = false)
+    private EnrollmentEntity enrollment;
+
+    @OneToOne(mappedBy = "tuition", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private BoletoMetadataEntity boletoMetadata;
 
     @Column(nullable = false, precision = 18, scale = 2)
     private BigDecimal amount; // Valor Original

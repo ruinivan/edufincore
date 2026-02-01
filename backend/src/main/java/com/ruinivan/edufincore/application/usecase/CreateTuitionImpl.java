@@ -20,6 +20,7 @@ public class CreateTuitionImpl implements CreateTuition {
     }
 
     public Tuition execute(CreateTuitionDTO input) {
+        log.info("Criando mensalidade...");
         // 1. Converte DTO -> Domínio
         Tuition newTuition = new Tuition(
                 UUID.randomUUID(),

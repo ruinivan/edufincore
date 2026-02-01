@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ruinivan.edufincore.application.dto.CreateTuitionDTO;
-import com.ruinivan.edufincore.application.usecase.CreateTuitionImpl;
+import com.ruinivan.edufincore.application.usecase.CreateTuition;
 import com.ruinivan.edufincore.domain.model.Tuition;
 
 import jakarta.validation.Valid;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequestMapping("/api/v1/tuitions")
 @RequiredArgsConstructor
 public class TuitionController {
-    private final CreateTuitionImpl createTuitionUseCase;
+    private final CreateTuition createTuitionUseCase;
 
     @PostMapping
     public ResponseEntity<Object> create(@RequestBody @Valid CreateTuitionDTO dto) {

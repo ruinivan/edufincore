@@ -7,8 +7,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "TB_STUDENT", indexes = {
-    @Index(name = "IDX_STUDENT_CPF", columnList = "cpf", unique = true),
-    @Index(name = "IDX_STUDENT_EMAIL", columnList = "email")
+        @Index(name = "IDX_STUDENT_CPF", columnList = "cpf", unique = true),
+        @Index(name = "IDX_STUDENT_EMAIL", columnList = "email")
 })
 @Getter
 @Setter
@@ -25,8 +25,9 @@ public class StudentEntity extends BaseEntity {
     @Column(nullable = false, length = 150)
     private String email;
 
-    // Relacionamento Opcional: Para carregar mensalidades do aluno
-    // FetchType.LAZY é mandatório para performance. Nunca use EAGER em listas.
     @OneToMany(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<TuitionEntity> tuitions = new ArrayList<>();
+    private List<EnrollmentEntity> enrollments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
+    private List<WalletTransactionEntity> walletTransactions = new ArrayList<>();
 }

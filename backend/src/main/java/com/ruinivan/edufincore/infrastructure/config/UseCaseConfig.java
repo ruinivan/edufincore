@@ -19,7 +19,7 @@ public class UseCaseConfig {
     // 1. Cria o Puro (ninguém de fora vê esse bean, por isso não precisa ser
     // público se não quiser)
     @Bean
-    private CreateTuitionImpl createTuitionImpl(TuitionGateway gateway) {
+    public CreateTuitionImpl createTuitionImpl(TuitionGateway gateway) {
         return new CreateTuitionImpl(gateway);
     }
 
@@ -32,7 +32,7 @@ public class UseCaseConfig {
     }
 
     @Bean
-    private CreateStudentImpl createStudentImpl(StudentGateway gateway) {
+    public CreateStudentImpl createStudentImpl(StudentGateway gateway) {
         return new CreateStudentImpl(gateway);
     }
 

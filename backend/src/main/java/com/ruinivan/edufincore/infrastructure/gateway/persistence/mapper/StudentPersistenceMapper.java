@@ -18,17 +18,17 @@ public class StudentPersistenceMapper {
         // Note que criamos uma nova entidade ou atualizamos uma existente.
         // Aqui assumimos criação/atualização simples.
         StudentEntity entity = new StudentEntity();
-        
+
         // Se o ID existir no domínio, passamos. Se não, o JPA gera (no caso de insert)
-        // Cuidado: No DDD puro, o ID geralmente nasce no domínio, mas vamos manter simples.
-        entity.setId(domainObj.getId()); 
+        // Cuidado: No DDD puro, o ID geralmente nasce no domínio, mas vamos manter
+        // simples.
+        entity.setId(domainObj.getId());
         entity.setName(domainObj.getName());
         entity.setCpf(domainObj.getCpf());
         entity.setEmail(domainObj.getEmail());
-        
-        // Não mapeamos a lista de Tuitions aqui para evitar Loop Infinito ou carga desnecessária (Lazy Loading)
-        entity.setTuitions(new ArrayList<>()); 
-        
+
+        // Não mapeamos a lista de Tuitions aqui para evitar Loop Infinito ou carga
+        // desnecessária (Lazy Loading)
         return entity;
     }
 
@@ -40,10 +40,9 @@ public class StudentPersistenceMapper {
 
         // Reconstruindo o objeto de domínio rico
         return new Student(
-            entity.getId(),
-            entity.getName(),
-            entity.getCpf(),
-            entity.getEmail()
-        );
+                entity.getId(),
+                entity.getName(),
+                entity.getCpf(),
+                entity.getEmail());
     }
 }
