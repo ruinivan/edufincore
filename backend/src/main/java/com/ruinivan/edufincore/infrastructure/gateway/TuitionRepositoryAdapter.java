@@ -3,35 +3,29 @@ package com.ruinivan.edufincore.infrastructure.gateway;
 import com.ruinivan.edufincore.application.gateway.TuitionGateway;
 import com.ruinivan.edufincore.domain.model.Tuition;
 import com.ruinivan.edufincore.infrastructure.gateway.persistence.entity.TuitionEntity;
-import com.ruinivan.edufincore.infrastructure.gateway.persistence.repository.JpaTuitionRepository;
+import com.ruinivan.edufincore.infrastructure.gateway.persistence.mapper.TuitionPersistenceMapper;
+import com.ruinivan.edufincore.infrastructure.gateway.persistence.repository.TuitionJpaRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class TuitionRepositoryAdapter implements TuitionGateway {
 
-    private final JpaTuitionRepository jpaRepository;
+    private final TuitionJpaRepository jpaRepository;
+    private final TuitionPersistenceMapper mapper;
 
     @Override
+    @Transactional
     public Tuition save(Tuition tuition) {
-        // 1. Mapeia Domínio -> Entity JPA
-        TuitionEntity entity = new TuitionEntity(
-            tuition.getId(),
-            tuition.getAmount(),
-            tuition.getDueDate(),
-            tuition.getStatus() // Getters que você criou no domínio (ou Lombok se usou lá)
-        );
+        TuitionEntity entity = mapper.toEntity(tuition);
 
-        // 2. Salva no Oracle
         TuitionEntity savedEntity = jpaRepository.save(entity);
 
-        // 3. Mapeia Entity JPA -> Domínio (Retorno)
-        // Nota: Idealmente teríamos um Mapper dedicado aqui para não poluir o código
-        return new Tuition(
-            savedEntity.getId(),
-            savedEntity.getAmount(),
-            savedEntity.getDueDate()
-        );
+        return mapper.toDomain(savedEntity);
     }
 }

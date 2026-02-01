@@ -1,31 +1,45 @@
 package com.ruinivan.edufincore.infrastructure.gateway.persistence.entity;
 
-import com.ruinivan.edufincore.domain.model.TuitionStatus;
+import com.ruinivan.edufincore.domain.model.TuitionStatus; // Seu Enum do Domínio
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.UUID;
 
 @Entity
-@Table(name = "TB_TUITION")
-@Data // Lombok gera Getters/Setters/Equals/HashCode
+@Table(name = "TB_TUITION", indexes = {
+    @Index(name = "IDX_TUITION_STATUS", columnList = "status"), // Busca rápida por pendentes
+    @Index(name = "IDX_TUITION_DUE_DATE", columnList = "due_date") // Relatórios por data
+})
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TuitionEntity {
+public class TuitionEntity extends BaseEntity {
 
-    @Id
-    private UUID id;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "student_id", nullable = false)
+    private StudentEntity student;
 
-    @Column(nullable = false, precision = 10, scale = 2)
-    private BigDecimal amount;
+    @Column(nullable = false, precision = 18, scale = 2)
+    private BigDecimal amount; // Valor Original
+
+    @Column(name = "discount_value", precision = 18, scale = 2)
+    private BigDecimal discountValue;
+
+    @Column(name = "penalty_value", precision = 18, scale = 2)
+    private BigDecimal penaltyValue;
+
+    @Column(name = "final_value", precision = 18, scale = 2)
+    private BigDecimal finalValue; // Valor calculado pago
 
     @Column(name = "due_date", nullable = false)
     private LocalDate dueDate;
 
+    @Column(name = "payment_date")
+    private LocalDate paymentDate;
+
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private TuitionStatus status;
+    @Column(nullable = false, length = 20)
+    private TuitionStatus status; // PENDING, PAID, LATE, CANCELLED
 }
