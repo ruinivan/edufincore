@@ -11,8 +11,9 @@ import java.util.Set;
 })
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Builder
 public class RoleEntity extends BaseEntity {
 
   @Column(nullable = false, unique = true, length = 50)
@@ -27,6 +28,7 @@ public class RoleEntity extends BaseEntity {
   // Relacionamento Muitos-para-Muitos: Uma Role tem Várias Funcionalidades
   // FetchType.EAGER é aceitável aqui pois roles não têm milhares de permissões,
   // e precisamos disso carregado no login.
+  @Builder.Default
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(name = "TB_ROLE_FUNCTIONALITIES", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "functionality_id"))
   private Set<FunctionalityEntity> functionalities = new HashSet<>();

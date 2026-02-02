@@ -7,8 +7,9 @@ import lombok.*;
 @Table(name = "TB_ADDRESS")
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Builder
 public class AddressEntity extends BaseEntity {
 
   @ManyToOne(fetch = FetchType.LAZY)

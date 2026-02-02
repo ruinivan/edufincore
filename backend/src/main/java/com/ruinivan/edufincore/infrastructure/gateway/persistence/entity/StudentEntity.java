@@ -12,8 +12,9 @@ import java.util.List;
 })
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Builder
 public class StudentEntity extends BaseEntity {
 
     @Column(nullable = false, length = 100)
@@ -25,9 +26,11 @@ public class StudentEntity extends BaseEntity {
     @Column(nullable = false, length = 150)
     private String email;
 
+    @Builder.Default
     @OneToMany(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<EnrollmentEntity> enrollments = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
     private List<WalletTransactionEntity> walletTransactions = new ArrayList<>();
 }

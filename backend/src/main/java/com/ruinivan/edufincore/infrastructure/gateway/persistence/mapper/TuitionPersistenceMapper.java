@@ -13,14 +13,8 @@ public class TuitionPersistenceMapper {
       return null;
     }
 
-    TuitionEntity entity = new TuitionEntity();
-
-    entity.setId(domainObj.getId());
-    entity.setAmount(domainObj.getAmount());
-    entity.setDueDate(domainObj.getDueDate());
-    entity.setStatus(domainObj.getStatus());
-
-    return entity;
+    return TuitionEntity.builder().amount(domainObj.getAmount()).dueDate(domainObj.getDueDate())
+        .status(domainObj.getStatus()).build();
   }
 
   public Tuition toDomain(TuitionEntity entity) {

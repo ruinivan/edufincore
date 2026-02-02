@@ -9,8 +9,9 @@ import lombok.*;
 })
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Builder
 public class FunctionalityEntity extends BaseEntity {
 
   @Column(nullable = false, unique = true, length = 50)

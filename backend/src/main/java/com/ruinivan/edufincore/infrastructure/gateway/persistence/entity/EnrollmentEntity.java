@@ -13,8 +13,9 @@ import java.util.List;
 })
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Builder
 public class EnrollmentEntity extends BaseEntity {
 
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -32,6 +33,7 @@ public class EnrollmentEntity extends BaseEntity {
   private String status; // ACTIVE, LOCKED, GRADUATED, DROPPED
 
   // Lista de mensalidades geradas para esta matrícula
+  @Builder.Default
   @OneToMany(mappedBy = "enrollment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private List<TuitionEntity> tuitions = new ArrayList<>();
 }

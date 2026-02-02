@@ -4,8 +4,6 @@ import com.ruinivan.edufincore.domain.model.Student;
 import com.ruinivan.edufincore.infrastructure.gateway.persistence.entity.StudentEntity;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-
 @Component
 public class StudentPersistenceMapper {
 
@@ -15,21 +13,13 @@ public class StudentPersistenceMapper {
             return null;
         }
 
-        // Note que criamos uma nova entidade ou atualizamos uma existente.
-        // Aqui assumimos criação/atualização simples.
-        StudentEntity entity = new StudentEntity();
-
-        // Se o ID existir no domínio, passamos. Se não, o JPA gera (no caso de insert)
-        // Cuidado: No DDD puro, o ID geralmente nasce no domínio, mas vamos manter
-        // simples.
-        entity.setId(domainObj.getId());
-        entity.setName(domainObj.getName());
-        entity.setCpf(domainObj.getCpf());
-        entity.setEmail(domainObj.getEmail());
-
-        // Não mapeamos a lista de Tuitions aqui para evitar Loop Infinito ou carga
-        // desnecessária (Lazy Loading)
-        return entity;
+        // Usamos o Builder. Não precisamos dar 'new' nem ter acesso ao construtor.
+        return StudentEntity.builder()
+                .name(domainObj.getName())
+                .cpf(domainObj.getCpf())
+                .email(domainObj.getEmail())
+                // .enrollments(...) // Listas opcionais ou ignoradas
+                .build();
     }
 
     // Converte de Infraestrutura (Banco) para Domínio (Regra de Negócio)
@@ -40,7 +30,6 @@ public class StudentPersistenceMapper {
 
         // Reconstruindo o objeto de domínio rico
         return new Student(
-                entity.getId(),
                 entity.getName(),
                 entity.getCpf(),
                 entity.getEmail());

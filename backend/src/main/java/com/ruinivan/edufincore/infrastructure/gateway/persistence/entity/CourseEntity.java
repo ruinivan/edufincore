@@ -8,8 +8,9 @@ import java.math.BigDecimal;
 @Table(name = "TB_COURSE")
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Builder
 public class CourseEntity extends BaseEntity {
 
   @Column(nullable = false, length = 150)

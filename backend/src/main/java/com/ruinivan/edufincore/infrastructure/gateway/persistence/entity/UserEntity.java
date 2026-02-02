@@ -11,8 +11,9 @@ import java.util.Set;
 })
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Builder
 public class UserEntity extends BaseEntity {
 
   @Column(nullable = false, unique = true)
@@ -26,6 +27,7 @@ public class UserEntity extends BaseEntity {
   private StudentEntity student;
 
   // Muitos Usuários podem ter Muitas Roles (ex: Aluno e Monitor ao mesmo tempo)
+  @Builder.Default
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(name = "TB_USER_ROLES", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
   private Set<RoleEntity> roles = new HashSet<>();

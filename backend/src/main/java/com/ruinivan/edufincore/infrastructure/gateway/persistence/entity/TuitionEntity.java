@@ -13,8 +13,9 @@ import java.time.LocalDate;
 })
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Builder
 public class TuitionEntity extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

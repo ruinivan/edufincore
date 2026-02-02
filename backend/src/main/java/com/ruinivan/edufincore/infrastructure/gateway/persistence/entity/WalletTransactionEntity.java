@@ -8,8 +8,9 @@ import java.math.BigDecimal;
 @Table(name = "TB_WALLET_TRANSACTION")
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Builder
 public class WalletTransactionEntity extends BaseEntity {
 
   @ManyToOne(fetch = FetchType.LAZY, optional = false)

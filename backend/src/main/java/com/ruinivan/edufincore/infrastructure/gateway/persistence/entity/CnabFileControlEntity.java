@@ -11,8 +11,9 @@ import java.time.LocalDateTime;
 })
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Builder
 public class CnabFileControlEntity extends BaseEntity {
 
   @Column(name = "file_name", nullable = false, length = 255)
