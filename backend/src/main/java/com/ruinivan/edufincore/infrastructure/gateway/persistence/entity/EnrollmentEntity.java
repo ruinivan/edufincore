@@ -2,6 +2,7 @@ package com.ruinivan.edufincore.infrastructure.gateway.persistence.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ import com.ruinivan.edufincore.domain.model.EnrollmentStatus;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Builder
+@SuperBuilder
 public class EnrollmentEntity extends BaseEntity {
 
   @ManyToOne(fetch = FetchType.LAZY, optional = false)

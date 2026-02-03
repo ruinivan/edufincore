@@ -3,6 +3,7 @@ package com.ruinivan.edufincore.infrastructure.gateway.persistence.entity;
 import com.ruinivan.edufincore.domain.model.TuitionStatus; // Seu Enum do Domínio
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -15,7 +16,7 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Builder
+@SuperBuilder
 public class TuitionEntity extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

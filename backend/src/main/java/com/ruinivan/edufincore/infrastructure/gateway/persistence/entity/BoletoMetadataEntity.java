@@ -2,6 +2,7 @@ package com.ruinivan.edufincore.infrastructure.gateway.persistence.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "TB_BOLETO_METADATA", indexes = {
@@ -12,7 +13,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Builder
+@SuperBuilder
 public class BoletoMetadataEntity extends BaseEntity {
 
   @OneToOne(fetch = FetchType.LAZY, optional = false)

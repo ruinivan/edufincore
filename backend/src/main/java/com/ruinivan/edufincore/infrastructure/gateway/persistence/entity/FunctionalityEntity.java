@@ -2,6 +2,7 @@ package com.ruinivan.edufincore.infrastructure.gateway.persistence.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "TB_FUNCTIONALITY", indexes = {
@@ -11,7 +12,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Builder
+@SuperBuilder
 public class FunctionalityEntity extends BaseEntity {
 
   @Column(nullable = false, unique = true, length = 50)

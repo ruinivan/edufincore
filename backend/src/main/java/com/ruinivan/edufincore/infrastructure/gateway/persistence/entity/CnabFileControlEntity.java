@@ -2,6 +2,7 @@ package com.ruinivan.edufincore.infrastructure.gateway.persistence.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -17,7 +18,7 @@ import com.ruinivan.edufincore.domain.model.CnabFileControlStatus;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Builder
+@SuperBuilder
 public class CnabFileControlEntity extends BaseEntity {
 
   @Column(name = "file_name", nullable = false, length = 255)

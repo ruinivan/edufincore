@@ -1,5 +1,6 @@
 package com.ruinivan.edufincore.domain.model;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class Address extends Base {
@@ -15,6 +16,29 @@ public class Address extends Base {
 
   public Address(UUID studentId, String zipCode, String street, String number, String complement, String district,
       String city, String state, boolean mainAddress) {
+    super();
+    this.studentId = studentId;
+    this.zipCode = zipCode;
+    this.street = street;
+    this.number = number;
+    this.complement = complement;
+    this.district = district;
+    this.city = city;
+    this.state = state;
+    this.mainAddress = mainAddress;
+  }
+
+  public static Address restore(UUID id, LocalDateTime createdAt, LocalDateTime updatedAt, UUID studentId,
+      String zipCode, String street, String number, String complement, String district, String city, String state,
+      boolean mainAddress) {
+    return new Address(id, createdAt, updatedAt, studentId, zipCode, street, number, complement, district, city,
+        state, mainAddress);
+  }
+
+  private Address(UUID id, LocalDateTime createdAt, LocalDateTime updatedAt, UUID studentId, String zipCode,
+      String street, String number, String complement, String district, String city, String state,
+      boolean mainAddress) {
+    super(id, createdAt, updatedAt);
     this.studentId = studentId;
     this.zipCode = zipCode;
     this.street = street;

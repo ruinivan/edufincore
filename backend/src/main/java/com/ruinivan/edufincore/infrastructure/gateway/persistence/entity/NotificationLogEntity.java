@@ -4,6 +4,7 @@ import com.ruinivan.edufincore.domain.model.NotificationLogStatus;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "TB_NOTIFICATION_LOG")
@@ -11,7 +12,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Builder
+@SuperBuilder
 public class NotificationLogEntity extends BaseEntity {
 
   @Column(nullable = false)
