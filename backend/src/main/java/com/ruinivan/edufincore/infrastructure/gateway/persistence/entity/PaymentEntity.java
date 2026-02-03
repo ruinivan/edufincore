@@ -5,6 +5,8 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import com.ruinivan.edufincore.domain.model.PaymentMethod;
+
 @Entity
 @Table(name = "TB_PAYMENT")
 @Getter
@@ -21,8 +23,9 @@ public class PaymentEntity extends BaseEntity {
     @Column(nullable = false, precision = 18, scale = 2)
     private BigDecimal amountPaid;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "payment_method", nullable = false, length = 20)
-    private String paymentMethod; // BOLETO, PIX, CREDIT_CARD
+    private PaymentMethod paymentMethod; // BOLETO, PIX, CREDIT_CARD
 
     // Id da transação externa (Nosso Número do Boleto ou End-to-End ID do Pix)
     @Column(name = "bank_transaction_id", length = 100, nullable = false)

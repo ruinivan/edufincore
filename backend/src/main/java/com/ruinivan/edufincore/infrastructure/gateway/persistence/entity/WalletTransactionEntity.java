@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.math.BigDecimal;
 
+import com.ruinivan.edufincore.domain.model.WalletTransactionType;
+
 @Entity
 @Table(name = "TB_WALLET_TRANSACTION")
 @Getter
@@ -20,8 +22,9 @@ public class WalletTransactionEntity extends BaseEntity {
   @Column(nullable = false, precision = 18, scale = 2)
   private BigDecimal amount;
 
+  @Enumerated(EnumType.STRING)
   @Column(nullable = false, length = 10)
-  private String type; // CREDIT, DEBIT
+  private WalletTransactionType type; // CREDIT, DEBIT
 
   @Column(nullable = false, length = 255)
   private String description; // "Reembolso pgto duplicado", "Abatimento mensalidade X"

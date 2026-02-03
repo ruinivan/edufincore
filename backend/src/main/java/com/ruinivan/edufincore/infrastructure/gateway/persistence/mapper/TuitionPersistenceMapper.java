@@ -22,6 +22,7 @@ public class TuitionPersistenceMapper {
       return null;
     }
 
-    return new Tuition(entity.getId(), entity.getAmount(), entity.getDueDate());
+    return new Tuition(entity.getEnrollment().getId(), entity.getAmount(), entity.getDiscountValue(),
+        entity.getPenaltyValue(), entity.getFinalValue(), entity.getDueDate());
   }
 }

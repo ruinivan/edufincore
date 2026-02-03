@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ruinivan.edufincore.domain.model.EnrollmentStatus;
+
 @Entity
 @Table(name = "TB_ENROLLMENT", indexes = {
     @Index(name = "IDX_ENROLL_STUDENT", columnList = "student_id"),
@@ -29,8 +31,9 @@ public class EnrollmentEntity extends BaseEntity {
   @Column(name = "enrollment_date", nullable = false)
   private LocalDate enrollmentDate;
 
+  @Enumerated(EnumType.STRING)
   @Column(nullable = false, length = 20)
-  private String status; // ACTIVE, LOCKED, GRADUATED, DROPPED
+  private EnrollmentStatus status; // ACTIVE, LOCKED, GRADUATED, DROPPED
 
   // Lista de mensalidades geradas para esta matrícula
   @Builder.Default

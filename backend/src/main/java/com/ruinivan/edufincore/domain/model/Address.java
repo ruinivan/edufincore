@@ -3,7 +3,7 @@ package com.ruinivan.edufincore.domain.model;
 import java.util.UUID;
 
 public class Address extends Base {
-  private UUID student_id;
+  private UUID studentId;
   private String zipCode;
   private String street;
   private String number;
@@ -13,9 +13,9 @@ public class Address extends Base {
   private String state;
   private boolean mainAddress;
 
-  public Address(UUID student_id, String zipCode, String street, String number, String complement, String district,
+  public Address(UUID studentId, String zipCode, String street, String number, String complement, String district,
       String city, String state, boolean mainAddress) {
-    this.student_id = student_id;
+    this.studentId = studentId;
     this.zipCode = zipCode;
     this.street = street;
     this.number = number;
@@ -27,7 +27,7 @@ public class Address extends Base {
   }
 
   public UUID getStudentId() {
-    return this.student_id;
+    return this.studentId;
   }
 
   public String getZipCode() {

@@ -2,7 +2,11 @@ package com.ruinivan.edufincore.infrastructure.gateway.persistence.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+
+import com.ruinivan.edufincore.domain.model.CnabFileControlStatus;
 
 @Entity
 @Table(name = "TB_CNAB_FILE_CONTROL", indexes = {
@@ -22,8 +26,9 @@ public class CnabFileControlEntity extends BaseEntity {
   @Column(name = "file_type", nullable = false, length = 10)
   private String fileType; // REMESSA (Envio), RETORNO (Recebimento)
 
+  @Enumerated(EnumType.STRING)
   @Column(name = "status", nullable = false, length = 20)
-  private String status; // PENDING, PROCESSED, ERROR
+  private CnabFileControlStatus status; // PENDING, PROCESSED, ERROR
 
   @Column(name = "bank_code", nullable = false, length = 3)
   private String bankCode;
@@ -32,7 +37,7 @@ public class CnabFileControlEntity extends BaseEntity {
   private Integer totalRecords;
 
   @Column(name = "total_amount", precision = 18, scale = 2)
-  private java.math.BigDecimal totalAmount;
+  private BigDecimal totalAmount;
 
   @Column(name = "processed_at")
   private LocalDateTime processedAt;

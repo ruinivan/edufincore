@@ -1,5 +1,7 @@
 package com.ruinivan.edufincore.infrastructure.gateway.persistence.entity;
 
+import com.ruinivan.edufincore.domain.model.NotificationLogStatus;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,8 +23,9 @@ public class NotificationLogEntity extends BaseEntity {
   @Column(nullable = false, length = 20)
   private String channel; // EMAIL, SMS, WHATSAPP
 
+  @Enumerated(EnumType.STRING)
   @Column(nullable = false, length = 20)
-  private String status; // SENT, FAILED, PENDING
+  private NotificationLogStatus status; // SENT, FAILED, PENDING
 
   @Column(name = "error_message", length = 4000)
   private String errorMessage;

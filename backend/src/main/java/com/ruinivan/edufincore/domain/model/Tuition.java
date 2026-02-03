@@ -6,19 +6,26 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
-public class Tuition {
-
-  private final UUID id;
-    private final BigDecimal amount;
-    private final LocalDate dueDate;
+public class Tuition extends Base {
+    private UUID enrollmentId;
+    private BigDecimal amount;
+    private BigDecimal discountValue;
+    private BigDecimal penaltyValue;
+    private BigDecimal finalValue;
+    private LocalDate dueDate;
+    private LocalDate paymenDate;
     private TuitionStatus status;
 
-    public Tuition(UUID id, BigDecimal amount, LocalDate dueDate) {
+    public Tuition(UUID enrollmentId, BigDecimal amount, BigDecimal discountValue, BigDecimal penaltyValue,
+            BigDecimal finalValue, LocalDate dueDate) {
         if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("Tuition amount must be positive");
         }
-        this.id = id;
+        this.enrollmentId = enrollmentId;
         this.amount = amount;
+        this.discountValue = discountValue;
+        this.penaltyValue = penaltyValue;
+        this.finalValue = finalValue;
         this.dueDate = dueDate;
         this.status = TuitionStatus.PENDING;
     }
@@ -30,7 +37,7 @@ public class Tuition {
         }
 
         long daysOverdue = ChronoUnit.DAYS.between(dueDate, paymentDate);
-        
+
         // Multa fixa de 2%
         BigDecimal fine = this.amount.multiply(new BigDecimal("0.02"));
 
@@ -51,10 +58,36 @@ public class Tuition {
         this.status = TuitionStatus.PAID;
     }
 
-    // Getters...
-    public UUID getId() { return id; }
-    public BigDecimal getAmount() { return amount; }
-    public LocalDate getDueDate() { return dueDate; }
-    public TuitionStatus getStatus() { return status; }
-  
+    public UUID getEnrollmentId() {
+        return this.enrollmentId;
+    }
+
+    public BigDecimal getAmount() {
+        return this.amount;
+    }
+
+    public BigDecimal getDiscountValue() {
+        return this.discountValue;
+    }
+
+    public BigDecimal getPenaltyValue() {
+        return this.penaltyValue;
+    }
+
+    public BigDecimal getFinalValue() {
+        return this.finalValue;
+    }
+
+    public LocalDate getDueDate() {
+        return this.dueDate;
+    }
+
+    public LocalDate PaymenDate() {
+        return this.paymenDate;
+    }
+
+    public TuitionStatus getStatus() {
+        return this.status;
+    }
+
 }
