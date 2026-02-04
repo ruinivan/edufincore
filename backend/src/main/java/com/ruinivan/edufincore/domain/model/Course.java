@@ -1,6 +1,8 @@
 package com.ruinivan.edufincore.domain.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class Course extends Base {
   private String name;
@@ -9,6 +11,21 @@ public class Course extends Base {
   private Integer totalInstallments;
 
   public Course(String name, String code, BigDecimal semesterPrice, Integer totalInstallments) {
+    super();
+    this.name = name;
+    this.code = code;
+    this.semesterPrice = semesterPrice;
+    this.totalInstallments = totalInstallments;
+  }
+
+  public static Course restore(UUID id, LocalDateTime createdAt, LocalDateTime updatedAt, String name, String code,
+      BigDecimal semesterPrice, Integer totalInstallments) {
+    return new Course(id, createdAt, updatedAt, name, code, semesterPrice, totalInstallments);
+  }
+
+  private Course(UUID id, LocalDateTime createdAt, LocalDateTime updatedAt, String name, String code,
+      BigDecimal semesterPrice, Integer totalInstallments) {
+    super(id, createdAt, updatedAt);
     this.name = name;
     this.code = code;
     this.semesterPrice = semesterPrice;

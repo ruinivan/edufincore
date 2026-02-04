@@ -29,12 +29,14 @@ public class BoletoMetadataPersistenceMapper {
     return entityBuilder.build();
   }
 
-  public BoletoMetadata toDomain(BoletoMetadataEntity entity){
-    if (entity == null){
+  public BoletoMetadata toDomain(BoletoMetadataEntity entity) {
+    if (entity == null) {
       return null;
     }
 
-    return new BoletoMetadata()
+    return BoletoMetadata.restore(entity.getId(), entity.getCreatedAt(), entity.getUpdatedAt(),
+        entity.getTuition().getId(), entity.getNossoNumero(), entity.getDigitableLine(), entity.getBarcode(),
+        entity.getBankCode(), entity.getDocumentNumber(), entity.isRegisteredAtBank());
   }
 
 }

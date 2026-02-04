@@ -1,5 +1,6 @@
 package com.ruinivan.edufincore.domain.model;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class BoletoMetadata extends Base {
@@ -13,6 +14,28 @@ public class BoletoMetadata extends Base {
 
   public BoletoMetadata(UUID tuitionId, String nossoNumero, String digitableLine, String barcode, String bankCode,
       String documentNumber, boolean registeredAtBank) {
+    super();
+    this.tuitionId = tuitionId;
+    this.nossoNumero = nossoNumero;
+    this.digitableLine = digitableLine;
+    this.barcode = barcode;
+    this.bankCode = bankCode;
+    this.documentNumber = documentNumber;
+    this.registeredAtBank = registeredAtBank;
+  }
+
+  public static BoletoMetadata restore(UUID id, LocalDateTime createdAt, LocalDateTime updatedAt, UUID tuitionId,
+      String nossoNumero,
+      String digitableLine, String barcode, String bankCode,
+      String documentNumber, boolean registeredAtBank) {
+    return new BoletoMetadata(id, createdAt, updatedAt, tuitionId, nossoNumero, digitableLine, barcode, bankCode,
+        documentNumber, registeredAtBank);
+  }
+
+  private BoletoMetadata(UUID id, LocalDateTime createdAt, LocalDateTime updatedAt, UUID tuitionId, String nossoNumero,
+      String digitableLine, String barcode, String bankCode,
+      String documentNumber, boolean registeredAtBank) {
+    super(id, createdAt, updatedAt);
     this.tuitionId = tuitionId;
     this.nossoNumero = nossoNumero;
     this.digitableLine = digitableLine;

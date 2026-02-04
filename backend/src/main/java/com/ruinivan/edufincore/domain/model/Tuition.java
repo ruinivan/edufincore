@@ -3,6 +3,7 @@ package com.ruinivan.edufincore.domain.model;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
@@ -21,6 +22,7 @@ public class Tuition extends Base {
         if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("Tuition amount must be positive");
         }
+        super();
         this.enrollmentId = enrollmentId;
         this.amount = amount;
         this.discountValue = discountValue;
@@ -28,6 +30,27 @@ public class Tuition extends Base {
         this.finalValue = finalValue;
         this.dueDate = dueDate;
         this.status = TuitionStatus.PENDING;
+    }
+
+    public static Tuition restore(UUID id, LocalDateTime createdAt, LocalDateTime updatedAt, UUID enrollmentId,
+            BigDecimal amount,
+            BigDecimal discountValue, BigDecimal penaltyValue,
+            BigDecimal finalValue, LocalDate dueDate, TuitionStatus status) {
+        return new Tuition(id, createdAt, updatedAt, enrollmentId, amount, discountValue, penaltyValue, finalValue,
+                dueDate, status);
+    }
+
+    private Tuition(UUID id, LocalDateTime createdAt, LocalDateTime updatedAt, UUID enrollmentId, BigDecimal amount,
+            BigDecimal discountValue, BigDecimal penaltyValue,
+            BigDecimal finalValue, LocalDate dueDate, TuitionStatus status) {
+        super(id, createdAt, updatedAt);
+        this.enrollmentId = enrollmentId;
+        this.amount = amount;
+        this.discountValue = discountValue;
+        this.penaltyValue = penaltyValue;
+        this.finalValue = finalValue;
+        this.dueDate = dueDate;
+        this.status = status;
     }
 
     // Regra de Negócio Pura: O cálculo mora aqui, não no Service do Spring

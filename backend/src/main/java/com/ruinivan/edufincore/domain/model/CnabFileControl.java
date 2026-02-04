@@ -2,6 +2,7 @@ package com.ruinivan.edufincore.domain.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class CnabFileControl extends Base {
   private String fileName;
@@ -23,7 +24,7 @@ public class CnabFileControl extends Base {
     if (totalAmount.compareTo(BigDecimal.ZERO) < 0) {
       throw new IllegalArgumentException("Total amount cannot be negative");
     }
-
+    super();
     this.fileName = fileName;
     this.fileType = fileType;
     this.bankCode = bankCode;
@@ -31,6 +32,27 @@ public class CnabFileControl extends Base {
     this.totalAmount = totalAmount;
     this.fileContentSample = fileContentSamble;
     this.status = CnabFileControlStatus.PENDING;
+  }
+
+  public static CnabFileControl restore(UUID id, LocalDateTime createdAt, LocalDateTime updatedAt, String fileName,
+      String fileType,
+      CnabFileControlStatus status, String bankCode, Integer totalRecords,
+      BigDecimal totalAmount, String fileContentSamble) {
+    return new CnabFileControl(id, createdAt, updatedAt, fileName, fileType, status, bankCode, totalRecords,
+        totalAmount, fileContentSamble);
+  }
+
+  private CnabFileControl(UUID id, LocalDateTime createdAt, LocalDateTime updatedAt, String fileName, String fileType,
+      CnabFileControlStatus status, String bankCode, Integer totalRecords,
+      BigDecimal totalAmount, String fileContentSamble) {
+    super(id, createdAt, updatedAt);
+    this.fileName = fileName;
+    this.fileType = fileType;
+    this.status = status;
+    this.bankCode = bankCode;
+    this.totalRecords = totalRecords;
+    this.totalAmount = totalAmount;
+    this.fileContentSample = fileContentSamble;
   }
 
   public String getFileName() {

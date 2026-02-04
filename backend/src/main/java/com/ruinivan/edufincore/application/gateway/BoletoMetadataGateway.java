@@ -1,9 +1,10 @@
 package com.ruinivan.edufincore.application.gateway;
 
 import java.util.Optional;
+import java.util.UUID;
 
-import com.ruinivan.edufincore.infrastructure.gateway.persistence.entity.BoletoMetadataEntity;
+import com.ruinivan.edufincore.domain.model.BoletoMetadata;
 
 public interface BoletoMetadataGateway {
-  Optional<BoletoMetadataEntity> findByTuitionId(String tuitionId);
+  Optional<BoletoMetadata> findByTuitionId(UUID tuitionId);
 }

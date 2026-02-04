@@ -21,6 +21,25 @@ public class AuditLog {
     this.oldValue = oldValue;
     this.newValue = newValue;
     this.userSystem = userSystem;
+    this.id = null;
+    this.timestamp = null;
+  }
+
+  public static AuditLog restore(UUID id, UUID entityId, String entityType, String operation, String oldValue,
+      String newValue, LocalDateTime timestamp, String userSystem) {
+    return new AuditLog(id, entityId, entityType, operation, oldValue, newValue, timestamp, userSystem);
+  }
+
+  private AuditLog(UUID id, UUID entityId, String entityType, String operation, String oldValue, String newValue,
+      LocalDateTime timestamp, String userSystem) {
+    this.id = id;
+    this.entityId = entityId;
+    this.entityType = entityType;
+    this.operation = operation;
+    this.oldValue = oldValue;
+    this.newValue = newValue;
+    this.timestamp = timestamp;
+    this.userSystem = userSystem;
   }
 
   public UUID getId() {
