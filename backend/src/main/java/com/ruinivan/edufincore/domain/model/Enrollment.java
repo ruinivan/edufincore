@@ -18,7 +18,13 @@ public class Enrollment extends Base {
     this.status = EnrollmentStatus.ACTIVE;
   }
 
-  public Enrollment(UUID id, LocalDateTime createdAt, LocalDateTime updatedAt, UUID studentId, UUID courseId,
+  public static Enrollment restore(UUID id, LocalDateTime createdAt, LocalDateTime updatedAt, UUID studentId,
+      UUID courseId,
+      LocalDate enrollmentDate, EnrollmentStatus status) {
+    return new Enrollment(id, createdAt, updatedAt, studentId, courseId, enrollmentDate, status);
+  }
+
+  private Enrollment(UUID id, LocalDateTime createdAt, LocalDateTime updatedAt, UUID studentId, UUID courseId,
       LocalDate enrollmentDate, EnrollmentStatus status) {
     super(id, createdAt, updatedAt);
     this.studentId = studentId;

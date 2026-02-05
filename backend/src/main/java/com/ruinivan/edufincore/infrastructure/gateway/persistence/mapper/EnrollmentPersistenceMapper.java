@@ -17,4 +17,9 @@ public class EnrollmentPersistenceMapper {
 
     return entityBuilder.student(studentRef).course(courseRef).build();
   }
+
+  public Enrollment toDomain(EnrollmentEntity entity) {
+    return Enrollment.restore(entity.getId(), entity.getCreatedAt(), entity.getUpdatedAt(), entity.getStudent().getId(),
+        entity.getCourse().getId(), entity.getEnrollmentDate(), entity.getStatus());
+  }
 }
