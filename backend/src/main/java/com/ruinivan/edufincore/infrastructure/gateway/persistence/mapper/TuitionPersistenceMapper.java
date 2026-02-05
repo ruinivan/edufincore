@@ -13,7 +13,8 @@ public class TuitionPersistenceMapper {
       return null;
     }
 
-    return TuitionEntity.builder().amount(domainObj.getAmount()).dueDate(domainObj.getDueDate())
+    return TuitionEntity.builder().id(domainObj.getId()).createdAt(domainObj.getCreatedAt())
+        .updatedAt(domainObj.getUpdatedAt()).amount(domainObj.getAmount()).dueDate(domainObj.getDueDate())
         .status(domainObj.getStatus()).build();
   }
 

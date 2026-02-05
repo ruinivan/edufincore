@@ -14,11 +14,11 @@ public class StudentPersistenceMapper {
         }
 
         // Usamos o Builder. Não precisamos dar 'new' nem ter acesso ao construtor.
-        return StudentEntity.builder()
+        return StudentEntity.builder().id(domainObj.getId()).createdAt(domainObj.getCreatedAt())
+                .updatedAt(domainObj.getUpdatedAt())
                 .name(domainObj.getName())
                 .cpf(domainObj.getCpf())
                 .email(domainObj.getEmail())
-                // .enrollments(...) // Listas opcionais ou ignoradas
                 .build();
     }
 

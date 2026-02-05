@@ -10,10 +10,10 @@ public class CreateStudentImpl implements CreateStudent {
 
   private static final Logger log = LoggerFactory.getLogger(CreateTuitionImpl.class);
 
-  private final StudentGateway studentGateway;
+  private final StudentGateway gateway;
 
-  public CreateStudentImpl(StudentGateway studentGateway) {
-    this.studentGateway = studentGateway;
+  public CreateStudentImpl(StudentGateway gateway) {
+    this.gateway = gateway;
   }
 
   // Removemos o @Transactional do Spring aqui para manter pureza.
@@ -21,11 +21,11 @@ public class CreateStudentImpl implements CreateStudent {
   public Student execute(Student student) {
     log.info("Tentando criar estudante com CPF: {}", student.getCpf());
 
-    if (studentGateway.existsByCpf(student.getCpf())) {
+    if (gateway.existsByCpf(student.getCpf())) {
       log.warn("Tentativa de cadastro duplicado para CPF: {}", student.getCpf());
       throw new StudentAlreadyExistsException("Já existe um aluno matriculado com este CPF.");
     }
 
-    return studentGateway.save(student);
+    return gateway.save(student);
   }
 }

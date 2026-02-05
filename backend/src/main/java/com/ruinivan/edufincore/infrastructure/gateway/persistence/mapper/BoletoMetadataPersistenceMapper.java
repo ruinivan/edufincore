@@ -14,17 +14,16 @@ public class BoletoMetadataPersistenceMapper {
       return null;
     }
 
-    var entityBuilder = BoletoMetadataEntity.builder().nossoNumero(domainObj.getNossoNumero())
+    var entityBuilder = BoletoMetadataEntity.builder().id(domainObj.getId()).createdAt(domainObj.getCreatedAt())
+        .updatedAt(domainObj.getUpdatedAt()).nossoNumero(domainObj.getNossoNumero())
         .digitableLine(domainObj.getDigitableLine()).barcode(domainObj.getBarcode()).bankCode(domainObj.getBankCode())
         .documentNumber(domainObj.getDocumentNumber()).registeredAtBank(domainObj.isRegisteredAtBank());
 
-    if (domainObj.getTuitionId() != null) {
-      TuitionEntity tuitionRef = TuitionEntity.builder()
-          .id(domainObj.getTuitionId())
-          .build();
+    TuitionEntity tuitionRef = TuitionEntity.builder()
+        .id(domainObj.getTuitionId())
+        .build();
 
-      entityBuilder.tuition(tuitionRef);
-    }
+    entityBuilder.tuition(tuitionRef);
 
     return entityBuilder.build();
   }
