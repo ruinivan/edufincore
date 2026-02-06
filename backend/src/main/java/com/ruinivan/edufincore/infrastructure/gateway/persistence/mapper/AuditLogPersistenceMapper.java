@@ -12,6 +12,7 @@ public class AuditLogPersistenceMapper {
     if (domainObj == null) {
       return null;
     }
+
     return AuditLogEntity.builder().id(domainObj.getId()).entityId(domainObj.getEntityId())
         .entityType(domainObj.getEntityType()).operation(domainObj.getOperation()).oldValue(domainObj.getOldValue())
         .newValue(domainObj.getNewValue()).timestamp(domainObj.getTimestamp()).userSystem(domainObj.getUserSystem())
@@ -22,6 +23,7 @@ public class AuditLogPersistenceMapper {
     if (entity == null) {
       return null;
     }
+
     return AuditLog.restore(entity.getId(), entity.getEntityId(), entity.getEntityType(), entity.getOperation(),
         entity.getOldValue(), entity.getNewValue(), entity.getTimestamp(), entity.getUserSystem());
   }

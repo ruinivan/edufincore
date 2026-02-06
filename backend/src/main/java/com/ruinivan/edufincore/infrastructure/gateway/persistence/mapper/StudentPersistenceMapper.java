@@ -7,13 +7,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class StudentPersistenceMapper {
 
-    // Converte do Domínio (Regra de Negócio) para Infraestrutura (Banco)
     public StudentEntity toEntity(Student domainObj) {
         if (domainObj == null) {
             return null;
         }
 
-        // Usamos o Builder. Não precisamos dar 'new' nem ter acesso ao construtor.
         return StudentEntity.builder().id(domainObj.getId()).createdAt(domainObj.getCreatedAt())
                 .updatedAt(domainObj.getUpdatedAt())
                 .name(domainObj.getName())
@@ -22,16 +20,12 @@ public class StudentPersistenceMapper {
                 .build();
     }
 
-    // Converte de Infraestrutura (Banco) para Domínio (Regra de Negócio)
     public Student toDomain(StudentEntity entity) {
         if (entity == null) {
             return null;
         }
 
-        // Reconstruindo o objeto de domínio rico
-        return new Student(
-                entity.getName(),
-                entity.getCpf(),
-                entity.getEmail());
+        return Student.restore(entity.getId(), entity.getCreatedAt(), entity.getUpdatedAt(), entity.getName(),
+                entity.getCpf(), entity.getEmail());
     }
 }

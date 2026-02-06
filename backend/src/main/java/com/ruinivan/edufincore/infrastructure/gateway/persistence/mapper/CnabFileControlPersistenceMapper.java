@@ -12,6 +12,7 @@ public class CnabFileControlPersistenceMapper {
     if (domainObj == null) {
       return null;
     }
+
     return CnabFileControlEntity.builder().id(domainObj.getId()).createdAt(domainObj.getCreatedAt())
         .updatedAt(domainObj.getUpdatedAt()).fileName(domainObj.getFileName()).fileType(domainObj.getFileType())
         .status(domainObj.getStatus()).bankCode(domainObj.getBankCode()).totalRecords(domainObj.getTotalRecords())
@@ -23,6 +24,7 @@ public class CnabFileControlPersistenceMapper {
     if (entity == null) {
       return null;
     }
+
     return CnabFileControl.restore(entity.getId(), entity.getCreatedAt(), entity.getUpdatedAt(), entity.getFileName(),
         entity.getFileType(), entity.getStatus(), entity.getBankCode(), entity.getTotalRecords(),
         entity.getTotalAmount(), entity.getFileContentSample());
