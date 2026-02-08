@@ -9,9 +9,11 @@ import com.ruinivan.edufincore.infrastructure.gateway.persistence.mapper.AuditLo
 import com.ruinivan.edufincore.infrastructure.gateway.persistence.repository.AuditLogJpaRepository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class AuditLogRepositoryAdapter implements AuditLogGateway {
 
   private final AuditLogPersistenceMapper mapper;

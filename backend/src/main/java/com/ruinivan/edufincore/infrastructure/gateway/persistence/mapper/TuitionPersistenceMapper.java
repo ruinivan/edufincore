@@ -1,5 +1,7 @@
 package com.ruinivan.edufincore.infrastructure.gateway.persistence.mapper;
 
+import java.util.UUID;
+
 import org.springframework.stereotype.Component;
 
 import com.ruinivan.edufincore.domain.model.Tuition;
@@ -23,7 +25,10 @@ public class TuitionPersistenceMapper {
       return null;
     }
 
-    return new Tuition(entity.getEnrollment().getId(), entity.getAmount(), entity.getDiscountValue(),
-        entity.getPenaltyValue(), entity.getFinalValue(), entity.getDueDate());
+    UUID enrollmentId = entity.getEnrollment() == null ? null : entity.getEnrollment().getId();
+
+    return Tuition.restore(entity.getId(), entity.getCreatedAt(), entity.getUpdatedAt(), enrollmentId,
+        entity.getAmount(), entity.getDiscountValue(),
+        entity.getPenaltyValue(), entity.getFinalValue(), entity.getDueDate(), entity.getStatus());
   }
 }

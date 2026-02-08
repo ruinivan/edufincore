@@ -11,9 +11,11 @@ import com.ruinivan.edufincore.infrastructure.gateway.persistence.mapper.BoletoM
 import com.ruinivan.edufincore.infrastructure.gateway.persistence.repository.BoletoMetadataJpaRepository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class BoletoMetadataRepositoryAdapter implements BoletoMetadataGateway {
 
   private final BoletoMetadataJpaRepository repository;

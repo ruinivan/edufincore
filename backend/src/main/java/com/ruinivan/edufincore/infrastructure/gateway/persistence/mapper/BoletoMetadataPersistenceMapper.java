@@ -1,5 +1,7 @@
 package com.ruinivan.edufincore.infrastructure.gateway.persistence.mapper;
 
+import java.util.UUID;
+
 import org.springframework.stereotype.Component;
 
 import com.ruinivan.edufincore.domain.model.BoletoMetadata;
@@ -14,18 +16,16 @@ public class BoletoMetadataPersistenceMapper {
       return null;
     }
 
-    var entityBuilder = BoletoMetadataEntity.builder().id(domainObj.getId()).createdAt(domainObj.getCreatedAt())
-        .updatedAt(domainObj.getUpdatedAt()).nossoNumero(domainObj.getNossoNumero())
-        .digitableLine(domainObj.getDigitableLine()).barcode(domainObj.getBarcode()).bankCode(domainObj.getBankCode())
-        .documentNumber(domainObj.getDocumentNumber()).registeredAtBank(domainObj.isRegisteredAtBank());
-
     TuitionEntity tuitionRef = TuitionEntity.builder()
         .id(domainObj.getTuitionId())
         .build();
 
-    entityBuilder.tuition(tuitionRef);
+    return BoletoMetadataEntity.builder().id(domainObj.getId()).createdAt(domainObj.getCreatedAt())
+        .updatedAt(domainObj.getUpdatedAt()).nossoNumero(domainObj.getNossoNumero())
+        .digitableLine(domainObj.getDigitableLine()).barcode(domainObj.getBarcode()).bankCode(domainObj.getBankCode())
+        .documentNumber(domainObj.getDocumentNumber()).registeredAtBank(domainObj.isRegisteredAtBank())
+        .tuition(tuitionRef).build();
 
-    return entityBuilder.build();
   }
 
   public BoletoMetadata toDomain(BoletoMetadataEntity entity) {
@@ -33,8 +33,10 @@ public class BoletoMetadataPersistenceMapper {
       return null;
     }
 
+    UUID tuitionId = entity.getTuition() == null ? null : entity.getTuition().getId();
+
     return BoletoMetadata.restore(entity.getId(), entity.getCreatedAt(), entity.getUpdatedAt(),
-        entity.getTuition().getId(), entity.getNossoNumero(), entity.getDigitableLine(), entity.getBarcode(),
+        tuitionId, entity.getNossoNumero(), entity.getDigitableLine(), entity.getBarcode(),
         entity.getBankCode(), entity.getDocumentNumber(), entity.isRegisteredAtBank());
   }
 
